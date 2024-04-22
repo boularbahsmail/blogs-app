@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateUser = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
+exports.DeleteUser = exports.UpdateUser = exports.CreateUser = exports.GetUserById = exports.GetUsers = void 0;
 const users = [
     {
         id: 1,
@@ -62,3 +62,17 @@ const UpdateUser = (req, res) => {
         .send(`User ${(_a = users[userIndex]) === null || _a === void 0 ? void 0 : _a.username} Updated Successfully!!`);
 };
 exports.UpdateUser = UpdateUser;
+const DeleteUser = (req, res) => {
+    const userId = parseInt(req.params.id);
+    // Find the index of the user to delete
+    const userIndex = users.findIndex((user) => user.id === userId);
+    // If user not found, return 404
+    if (userIndex === -1) {
+        return res.status(404).send("User Not Found!!");
+    }
+    users.splice(userIndex, 1);
+    res
+        .status(201)
+        .send(`User Deleted Successfully!!`);
+};
+exports.DeleteUser = DeleteUser;

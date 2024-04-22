@@ -4,6 +4,7 @@ import {
   GetUserById,
   CreateUser,
   UpdateUser,
+  DeleteUser,
 } from "../handlers/usersHandler";
 
 // Init new express app
@@ -23,6 +24,7 @@ app.get("/api/users", GetUsers);
 app.get("/api/users/:id", GetUserById);
 app.post("/api/users/create", CreateUser);
 app.put("/api/users/update/:id", UpdateUser);
+app.delete("/api/users/delete/:id", DeleteUser);
 
 // Start the server
 app.listen(PORT, () => {

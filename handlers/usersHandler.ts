@@ -93,5 +93,5 @@ export const DeleteUser = (req: Request, res: Response) => {
   users.splice(userIndex, 1);
   res
     .status(201)
-    .send(`User ${users[userIndex]?.username} Deleted Successfully!!`);
+    .send(`User Deleted Successfully!!`);
 };

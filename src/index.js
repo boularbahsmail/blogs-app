@@ -19,6 +19,7 @@ app.get("/api/users", usersHandler_1.GetUsers);
 app.get("/api/users/:id", usersHandler_1.GetUserById);
 app.post("/api/users/create", usersHandler_1.CreateUser);
 app.put("/api/users/update/:id", usersHandler_1.UpdateUser);
+app.delete("/api/users/delete/:id", usersHandler_1.DeleteUser);
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
