@@ -1,26 +1,17 @@
 import { Request, Response } from "express";
+import { users } from "../static/users.static";
+import { User } from "../types/users.types";
 
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  password: string;
-}
+// Auth
+const AuthenticateUser = (): void => {};
 
-const users: User[] = [
-  {
-    id: 1,
-    username: "ismailboularbah",
-    email: "ismailium01@gmail.com",
-    password: "123Pass",
-  },
-];
+const CheckAuth = (): void => {};
 
-export const GetUsers = (_: Request, res: Response) => {
-  res.status(201).send(users);
+export const GetUsers = (_: Request, res: Response): Response<User[]> => {
+  return res.status(201).send(users);
 };
 
-export const GetUserById = (req: Request, res: Response) => {
+export const GetUserById = (req: Request, res: Response): Response<User> => {
   const userId = parseInt(req.params.id);
 
   const user = users.find((user: User) => user.id === userId);
@@ -31,7 +22,7 @@ export const GetUserById = (req: Request, res: Response) => {
   return res.status(201).send(user);
 };
 
-export const CreateUser = (req: Request, res: Response) => {
+export const CreateUser = (req: Request, res: Response): Response<string> => {
   // Generate new user's id
   const newUserId = users?.length + 1;
 
@@ -61,7 +52,7 @@ export const CreateUser = (req: Request, res: Response) => {
     .send(`User ${newUser?.username} Created Sucessfully!!`);
 };
 
-export const UpdateUser = (req: Request, res: Response) => {
+export const UpdateUser = (req: Request, res: Response): Response<string> => {
   const userId = parseInt(req.params.id);
   const { username, email, password } = req.body;
 
@@ -74,12 +65,12 @@ export const UpdateUser = (req: Request, res: Response) => {
   }
 
   users[userIndex] = { ...users[userIndex], username, email, password };
-  res
+  return res
     .status(201)
     .send(`User ${users[userIndex]?.username} Updated Successfully!!`);
 };
 
-export const DeleteUser = (req: Request, res: Response) => {
+export const DeleteUser = (req: Request, res: Response): Response<string> => {
   const userId = parseInt(req.params.id);
 
   // Find the index of the user to delete
@@ -91,7 +82,5 @@ export const DeleteUser = (req: Request, res: Response) => {
   }
 
   users.splice(userIndex, 1);
-  res
-    .status(201)
-    .send(`User Deleted Successfully!!`);
+  return res.status(201).send(`User Deleted Successfully!!`);
 };
