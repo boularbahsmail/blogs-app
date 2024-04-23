@@ -1,14 +1,14 @@
 {
-  "name": "blogs-app",
+  "name": "blogs-app-api-cms",
   "version": "1.0.0",
-  "description": "",
+  "description": "Trying to build a blogs app cms api to manage blog posts and users..",
   "main": "index.js",
   "scripts": {
-    "dev": "npx tsc; nodemon src/index.js",
+    "dev": "npx tsc; nodemon dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ismailium",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.1.0",

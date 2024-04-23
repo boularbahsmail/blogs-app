@@ -9,3 +9,4 @@ exports.users = [
         password: "123Pass",
     },
 ];
+//# sourceMappingURL=users.static.js.map

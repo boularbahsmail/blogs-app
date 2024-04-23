@@ -70,3 +70,4 @@ const DeleteUser = (req, res) => {
     return res.status(201).send(`User Deleted Successfully!!`);
 };
 exports.DeleteUser = DeleteUser;
+//# sourceMappingURL=usersHandler.js.map

@@ -24,3 +24,4 @@ app.delete("/api/users/delete/:id", usersHandler_1.DeleteUser);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+//# sourceMappingURL=index.js.map
