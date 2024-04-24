@@ -40,6 +40,7 @@ export const CreateUser = (req: Request, res: Response): Response<string> => {
   const existingUser = users.find(
     (user) => user.username === username || user.email === email
   );
+
   if (existingUser) {
     return res
       .status(400)

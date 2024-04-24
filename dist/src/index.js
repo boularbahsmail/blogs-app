@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const usersHandler_1 = require("../handlers/usersHandler");
 // Init new express app
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 // Middleware to parse JSON bodies
 app.use(express_1.default.json());
 // Home
