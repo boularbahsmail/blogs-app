@@ -50,7 +50,7 @@ export const CreateUser = (req: Request, res: Response): Response<string> => {
   users.push(newUser);
   return res
     .status(201)
-    .send(`User ${newUser?.username} Created Sucessfully!!`);
+    .send(`User ${newUser?.username} Created Successfully!!`);
 };
 
 export const UpdateUser = (req: Request, res: Response): Response<string> => {

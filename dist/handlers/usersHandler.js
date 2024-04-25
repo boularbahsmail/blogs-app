@@ -39,7 +39,7 @@ const CreateUser = (req, res) => {
     users_static_1.users.push(newUser);
     return res
         .status(201)
-        .send(`User ${newUser === null || newUser === void 0 ? void 0 : newUser.username} Created Sucessfully!!`);
+        .send(`User ${newUser === null || newUser === void 0 ? void 0 : newUser.username} Created Successfully!!`);
 };
 exports.CreateUser = CreateUser;
 const UpdateUser = (req, res) => {
