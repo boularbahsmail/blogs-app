@@ -1,16 +1,83 @@
 import { Request, Response } from "express";
 import { users } from "../static/users.static";
-import { User } from "../types/users.types";
+import { SignInType, User } from "../types/users.types";
+import { supabase } from "../db/supabase";
 
-// Auth
-const AuthenticateUser = (): void => {};
+// Sign in handler
+export const SignIn = async (
+  req: Request,
+  res: Response
+): Promise<Response<string>> => {
+  // Extract user credintels from request body
+  const { email, password }: SignInType = req.body;
 
+  // Call supabase built-in sign in function
+  const { data: user, err: signInErr } = await supabase.auth.signInWithPassword(
+    {
+      email,
+      password,
+    }
+  );
+
+  if (signInErr) {
+    return res.status(403).send(`Error signing in: ${signInErr.message}`);
+  }
+  console.log("User data:", user);
+  return res.status(201).send("Signed in successfully!!");
+};
+
+// Sign up handler
+export const SignUp = async (
+  res: Response,
+  req: Request
+): Promise<Response<string>> => {
+  // Extract new user info from request body
+  const {
+    avatar,
+    first,
+    last,
+    username,
+    email,
+    password,
+    role,
+  }: SignInType | any = req.body;
+
+  // Call supabase built-up sign in function
+  const { data: user, err: signUpErr }: any = supabase.auth.SignUp({
+    email: email,
+    password: password,
+  });
+
+  if (signUpErr) {
+    return res.status(403).send(`Error signing up: ${signUpErr.message}`);
+  }
+
+  try {
+    const { data, err } = await supabase.from("users").insert({
+      avatar: avatar,
+      first: first,
+      last: last,
+      username: username,
+      email: email,
+      role: role,
+    });
+  } catch (err) {
+    return res.status(403).send(`Error adding new user: ${err}`);
+  }
+
+  console.log("User data:", user);
+  return res.status(201).send("Signed up successfully!!");
+};
+
+// Check auth
 const CheckAuth = (): void => {};
 
+// Fetch all users
 export const GetUsers = (_: Request, res: Response): Response<User[]> => {
   return res.status(201).send(users);
 };
 
+// Fetch user by id
 export const GetUserById = (req: Request, res: Response): Response<User> => {
   const userId = parseInt(req.params.id);
 
@@ -22,6 +89,7 @@ export const GetUserById = (req: Request, res: Response): Response<User> => {
   return res.status(201).send(user);
 };
 
+// Create new user
 export const CreateUser = (req: Request, res: Response): Response<string> => {
   // Generate new user's id
   const newUserId = users?.length + 1;
@@ -53,6 +121,7 @@ export const CreateUser = (req: Request, res: Response): Response<string> => {
     .send(`User ${newUser?.username} Created Successfully!!`);
 };
 
+// Update user data by id
 export const UpdateUser = (req: Request, res: Response): Response<string> => {
   const userId = parseInt(req.params.id);
   const { username, email, password } = req.body;
@@ -71,6 +140,7 @@ export const UpdateUser = (req: Request, res: Response): Response<string> => {
     .send(`User ${users[userIndex]?.username} Updated Successfully!!`);
 };
 
+// Delete an existing user by id
 export const DeleteUser = (req: Request, res: Response): Response<string> => {
   const userId = parseInt(req.params.id);
 

@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import { Blog } from "../types/blogs.types";
 import { blogs } from "../static/blogs.static";
 
+// Fetch all blogs
 export const GetBlogs = (_: Request, res: Response): Response<Blog[]> => {
   return res.status(201).send(blogs);
 };
 
+// Fetch blog by id
 export const GetBlogByid = (req: Request, res: Response): Response<Blog> => {
   const blogId = parseInt(req.params.id);
 
@@ -17,6 +19,7 @@ export const GetBlogByid = (req: Request, res: Response): Response<Blog> => {
   return res.status(201).send(blog);
 };
 
+// Create new blog
 export const CreateBlog = (req: Request, res: Response): Response<string> => {
   // Generate new blog id
   const newBlogId = blogs?.length + 1;
@@ -40,6 +43,7 @@ export const CreateBlog = (req: Request, res: Response): Response<string> => {
   return res.status(201).send("Blog Created Successfuly");
 };
 
+// Update a blog by id
 export const UpdateBlog = (req: Request, res: Response): Response<string> => {
   const blogId = parseInt(req.params.id);
   const { title, subTitle, content, tags } = req.body;
@@ -60,6 +64,7 @@ export const UpdateBlog = (req: Request, res: Response): Response<string> => {
     );
 };
 
+// Delete an existing blog by id
 export const DeleteBlog = (req: Request, res: Response): Response<string> => {
   const blogId = parseInt(req.params.id);
 

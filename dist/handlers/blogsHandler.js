@@ -2,10 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteBlog = exports.UpdateBlog = exports.CreateBlog = exports.GetBlogByid = exports.GetBlogs = void 0;
 const blogs_static_1 = require("../static/blogs.static");
+// Fetch all blogs
 const GetBlogs = (_, res) => {
     return res.status(201).send(blogs_static_1.blogs);
 };
 exports.GetBlogs = GetBlogs;
+// Fetch blog by id
 const GetBlogByid = (req, res) => {
     const blogId = parseInt(req.params.id);
     const blog = blogs_static_1.blogs.find((blog) => blog.id === blogId);
@@ -15,6 +17,7 @@ const GetBlogByid = (req, res) => {
     return res.status(201).send(blog);
 };
 exports.GetBlogByid = GetBlogByid;
+// Create new blog
 const CreateBlog = (req, res) => {
     // Generate new blog id
     const newBlogId = (blogs_static_1.blogs === null || blogs_static_1.blogs === void 0 ? void 0 : blogs_static_1.blogs.length) + 1;
@@ -34,6 +37,7 @@ const CreateBlog = (req, res) => {
     return res.status(201).send("Blog Created Successfuly");
 };
 exports.CreateBlog = CreateBlog;
+// Update a blog by id
 const UpdateBlog = (req, res) => {
     const blogId = parseInt(req.params.id);
     const { title, subTitle, content, tags } = req.body;
@@ -49,8 +53,8 @@ const UpdateBlog = (req, res) => {
         .send(`Blog "${blogs_static_1.blogs[blogIndex].title}" By ${blogs_static_1.blogs[blogIndex].author} Updated Successfully!!`);
 };
 exports.UpdateBlog = UpdateBlog;
+// Delete an existing blog by id
 const DeleteBlog = (req, res) => {
-    var _a;
     const blogId = parseInt(req.params.id);
     // Find the index of the blog post to delete
     const blogIndex = blogs_static_1.blogs.findIndex((blog) => (blog === null || blog === void 0 ? void 0 : blog.id) === blogId);
@@ -59,9 +63,7 @@ const DeleteBlog = (req, res) => {
         return res.status(404).send("Blog Post Not Found!!");
     }
     blogs_static_1.blogs.splice(blogIndex, 1);
-    return res
-        .status(201)
-        .send(`Blog Post '${(_a = blogs_static_1.blogs[blogIndex]) === null || _a === void 0 ? void 0 : _a.title}' Deleted Successfully`);
+    return res.status(201).send("Blog Post Deleted Successfully");
 };
 exports.DeleteBlog = DeleteBlog;
 //# sourceMappingURL=blogsHandler.js.map

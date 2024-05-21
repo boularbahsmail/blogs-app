@@ -6,6 +6,7 @@ import {
   CreateUser,
   UpdateUser,
   DeleteUser,
+  SignIn,
 } from "../handlers/usersHandler";
 
 import {
@@ -27,6 +28,9 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
 });
+
+// Auth
+app.post("/api/auth/sign-in", SignIn);
 
 // Users Endpoints
 app.get("/api/users", GetUsers);

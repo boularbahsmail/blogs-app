@@ -15,6 +15,8 @@ app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("Hello World");
 });
+// Auth
+app.post("/api/auth/sign-in", usersHandler_1.SignIn);
 // Users Endpoints
 app.get("/api/users", usersHandler_1.GetUsers);
 app.get("/api/users/:id", usersHandler_1.GetUserById);
